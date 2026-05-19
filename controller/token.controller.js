@@ -11,7 +11,6 @@ const verifyToken = async (req, res) => {
     res.status(401).json({ message: "Invalid User" });
   }
 };
-console.log(jwt)
 
 module.exports = {
   verifyToken,

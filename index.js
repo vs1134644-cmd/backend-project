@@ -70,9 +70,9 @@ app.get("/file", (req, res) => {
 // API endpoints
 app.post("/signup", signup);
 app.post("/login", login);
-app.post("/file", upload.single("file"), createFile);
+app.post("/files", upload.single("file"), createFile);
 app.get("/files", fetchFile);
-app.delete("/file/:id", deleteFile);
-app.get("/file/download/:id", downloadFile);
+app.delete("/files/:id", deleteFile);
+app.get("/files/download/:id", downloadFile);
 app.get("/dashboard", fetchDashboard);
 app.post("/token/verify", verifyToken);

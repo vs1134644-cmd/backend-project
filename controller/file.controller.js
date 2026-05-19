@@ -35,7 +35,12 @@ const deleteFile = async (req, res) => {
     const file = await FileModel.findByIdAndDelete(id);
     if (!file) return res.status(404).json({ message: "File not found" });
 
-    fs.unlink(file.path);
+    const filePath = path.join(__dirname, "..", file.path);
+
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+
     res.status(200).json(file);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -46,7 +51,8 @@ const downloadFile = async (req, res) => {
   try {
     const { id } = req.params;
     const file = await FileModel.findById(id);
-    console.log(file);    const root = process.cwd();
+    console.log(file);
+    const root = process.cwd();
     const filePath = path.join(root, file.path);
 
     res.setHeader(

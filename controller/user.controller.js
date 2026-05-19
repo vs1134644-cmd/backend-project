@@ -38,8 +38,6 @@ const login = async (req, res) => {
       expiresIn: "7d",
     });
 
-    console.log(token)
-
     res.status(200).json({ message: "Login success", token: token });
   } catch (err) {
     res.status(500).json({ message: err.message });
