@@ -35,6 +35,7 @@ const {
 } = require("./controller/file.controller");
 const fetchDashboard = require("./controller/dashboard.controller");
 const { verifyToken } = require("./controller/token.controller");
+const { shareFile } = require("./controller/shareFile.controller");
 const app = express();
 app.listen(process.env.PORT || 8080);
 
@@ -70,9 +71,10 @@ app.get("/file", (req, res) => {
 // API endpoints
 app.post("/signup", signup);
 app.post("/login", login);
-app.post("/files", upload.single("file"), createFile);
+app.post("/file", upload.single("file"), createFile);
 app.get("/files", fetchFile);
 app.delete("/files/:id", deleteFile);
 app.get("/files/download/:id", downloadFile);
 app.get("/dashboard", fetchDashboard);
 app.post("/token/verify", verifyToken);
+app.post("/share", shareFile);

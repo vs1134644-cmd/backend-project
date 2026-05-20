@@ -80,6 +80,7 @@ const fetchFiles = async () => {
                       <i class="ri-delete-bin-line"></i>
                     </button>
                     <button
+                    onclick="openModelForShare()"
                       class="bg-amber-500 p-1 px-2 rounded text-white hover:bg-amber-700"
                     >
                       <i class="ri-share-line"></i>
@@ -130,4 +131,21 @@ const downloadFiles = async (id, filename) => {
   } catch (err) {
     console.log(err.response ? err.response.data.message : err.message);
   }
+};
+
+const openModelForShare = () => {
+  new Swal({
+    showConfirmButton: false,
+    html: `
+      <form class="text-left flex flex-col gap-6" onsubmit="shareFile('', event)">
+        <h1 class="font-medium text-black text-2xl">Email id</h1>
+        <input required name="email" class="border border-gray-300 w-full p-3 rounded" placeholder="main@gamil.com" />
+        <button id="sent" class="bg-indigo-400 hover:bg-indigo-500 text-white rounded py-3 px-8 w-fit font-medium">Send</button>
+        <div class="flex items-center gap-2">
+          <p class="text-gray-500">You are sharing - </p>
+          <p class="text-green-400 font-medium"></p>
+        </div>
+      </form>
+    `,
+  });
 };

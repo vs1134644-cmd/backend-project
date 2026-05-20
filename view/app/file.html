@@ -15,7 +15,10 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="https://unpkg.com/axios@1.13.2/dist/axios.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script> -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <div class="bg-gray-300 min-h-screen">
@@ -88,7 +91,7 @@
             </button>
             <button
               class="bg-gray-100 px-3 py-2 rounded hover:bg-gray-200"
-              onclick="toggleSidebar()"
+              onclick="sidebarToggle()"
             >
               <i class="ri-menu-2-line"></i>
             </button>
@@ -169,6 +172,7 @@
         </div>
       </div>
     </div>
+    <script src="../js/sidebar.js"></script>
     <script src="../js/session.js"></script>
     <script src="../js/dashboard.js"></script>
     <script src="../js/file.js"></script>
