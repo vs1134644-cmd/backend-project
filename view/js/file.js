@@ -1,3 +1,7 @@
+window.onload = () => {
+  fetchFiles();
+};
+
 const toast = new Notyf({
   position: {
     x: "center",
@@ -13,10 +17,6 @@ const toggleDrawer = () => {
   } else {
     drawer.style.right = "0px";
   }
-};
-
-window.onload = () => {
-  fetchFiles();
 };
 
 const uploadFile = async (e) => {
@@ -80,7 +80,7 @@ const fetchFiles = async () => {
                       <i class="ri-delete-bin-line"></i>
                     </button>
                     <button
-                    onclick="openModelForShare()"
+                    onclick="openModelForShare('${file?._id}', '${file.filename}')"
                       class="bg-amber-500 p-1 px-2 rounded text-white hover:bg-amber-700"
                     >
                       <i class="ri-share-line"></i>
@@ -133,19 +133,42 @@ const downloadFiles = async (id, filename) => {
   }
 };
 
-const openModelForShare = () => {
+const openModelForShare = (id, filename) => {
   new Swal({
     showConfirmButton: false,
     html: `
-      <form class="text-left flex flex-col gap-6" onsubmit="shareFile('', event)">
+      <form onsubmit="shareFile(event, '${id}')" class="text-left flex flex-col gap-6" onsubmit="shareFile('', event)">
         <h1 class="font-medium text-black text-2xl">Email id</h1>
         <input required name="email" class="border border-gray-300 w-full p-3 rounded" placeholder="main@gamil.com" />
         <button id="sent" class="bg-indigo-400 hover:bg-indigo-500 text-white rounded py-3 px-8 w-fit font-medium">Send</button>
         <div class="flex items-center gap-2">
           <p class="text-gray-500">You are sharing - </p>
-          <p class="text-green-400 font-medium"></p>
+          <p class="text-green-400 font-medium">${filename}</p>
         </div>
       </form>
     `,
   });
+};
+
+const shareFile = (e, id) => {
+  try {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.elements.email.value.trim();
+    const sentButton = document.getElementById("sent");
+    sentButton.disabled = true;
+    sentButton.innerHTML = `<i class="ri-loader-4-line inline-block animate-spin"></i> Processing`;
+
+    const payload = {
+      email: email,
+      fileId: id,
+    };
+
+    const { data } = axios.post(`http://localhost:8080/share`, payload);
+    toast.success("File sent successfuly");
+  } catch (err) {
+    toast.error(err.response ? err.response.data.message : err.message);
+  } finally {
+    Swal.close();
+  }
 };
