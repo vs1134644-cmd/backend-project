@@ -36,6 +36,7 @@ const {
 const fetchDashboard = require("./controller/dashboard.controller");
 const { verifyToken } = require("./controller/token.controller");
 const { shareFile } = require("./controller/shareFile.controller");
+const AuthMiddleware = require("./middleware/auth.middleware");
 const app = express();
 app.listen(process.env.PORT || 8080);
 
@@ -43,8 +44,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("view"));
-// ui endpoinds
 
+// ui endpoinds
 const getPath = (filename) => {
   return path.join(root, "view", filename);
 };
@@ -64,6 +65,7 @@ app.get("/signup", (req, res) => {
 app.get("/dashboard", (req, res) => {
   res.sendFile(getPath("app/dashboard.html"));
 });
+
 app.get("/file", (req, res) => {
   res.sendFile(getPath("app/file.html"));
 });
@@ -71,10 +73,10 @@ app.get("/file", (req, res) => {
 // API endpoints
 app.post("/signup", signup);
 app.post("/login", login);
-app.post("/file", upload.single("file"), createFile);
-app.get("/files", fetchFile);
-app.delete("/files/:id", deleteFile);
-app.get("/files/download/:id", downloadFile);
+app.post("/file", AuthMiddleware, upload.single("file"), createFile);
+app.get("/files", AuthMiddleware, fetchFile);
+app.delete("/files/:id", AuthMiddleware, deleteFile);
+app.get("/files/download/:id", AuthMiddleware, downloadFile);
 app.get("/dashboard", fetchDashboard);
 app.post("/token/verify", verifyToken);
-app.post("/share", shareFile);
+app.post("/share", AuthMiddleware, shareFile);

@@ -19,6 +19,15 @@ const toggleDrawer = () => {
   }
 };
 
+const getToken = () => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("authKey")}`,
+    },
+  };
+  return options;
+};
+
 const uploadFile = async (e) => {
   try {
     e.preventDefault();
@@ -35,6 +44,7 @@ const uploadFile = async (e) => {
         progress.style.width = percentage + "%";
         progress.innerHTML = percentage + "%";
       },
+      ...getToken(),
     };
 
     const { data } = await axios.post(
@@ -49,7 +59,7 @@ const uploadFile = async (e) => {
     form.reset();
     fetchFiles();
   } catch (err) {
-    console.log(err.response ? err.response.data.message : err.message);
+    toast.error(err.response ? err.response.data.message : err.message);
   }
 };
 
@@ -60,7 +70,7 @@ const getSize = (size) => {
 
 const fetchFiles = async () => {
   try {
-    const { data } = await axios("http://localhost:8080/files");
+    const { data } = await axios("http://localhost:8080/files", getToken());
     const tableBody = document.getElementById("files-table");
     tableBody.innerHTML = "";
 
@@ -98,13 +108,16 @@ const fetchFiles = async () => {
       tableBody.innerHTML += ui;
     }
   } catch (err) {
-    console.log(err);
+    toast.error(err.response ? err.response.data.message : err.message);
   }
 };
 
 const deleteFile = async (id) => {
   try {
-    const { data } = await axios.delete(`http://localhost:8080/files/${id}`);
+    const { data } = await axios.delete(
+      `http://localhost:8080/files/${id}`,
+      getToken(),
+    );
     toast.success("File deleted");
     fetchFiles();
   } catch (err) {
@@ -116,6 +129,7 @@ const downloadFiles = async (id, filename) => {
   try {
     const options = {
       responseType: "blob",
+      ...getToken(),
     };
     const { data } = await axios.get(
       `http://localhost:8080/files/download/${id}`,
@@ -129,7 +143,7 @@ const downloadFiles = async (id, filename) => {
     a.click();
     a.remove();
   } catch (err) {
-    console.log(err.response ? err.response.data.message : err.message);
+    toast.error(err.response ? err.response.data.message : err.message);
   }
 };
 
@@ -164,7 +178,11 @@ const shareFile = (e, id) => {
       fileId: id,
     };
 
-    const { data } = axios.post(`http://localhost:8080/share`, payload);
+    const { data } = axios.post(
+      `http://localhost:8080/share`,
+      payload,
+      getToken(),
+    );
     toast.success("File sent successfuly");
   } catch (err) {
     toast.error(err.response ? err.response.data.message : err.message);
