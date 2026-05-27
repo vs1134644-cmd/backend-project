@@ -35,7 +35,7 @@ const {
 } = require("./controller/file.controller");
 const fetchDashboard = require("./controller/dashboard.controller");
 const { verifyToken } = require("./controller/token.controller");
-const { shareFile } = require("./controller/shareFile.controller");
+const { shareFile, fetchShared } = require("./controller/shareFile.controller");
 const AuthMiddleware = require("./middleware/auth.middleware");
 const app = express();
 app.listen(process.env.PORT || 8080);
@@ -80,3 +80,4 @@ app.get("/files/download/:id", AuthMiddleware, downloadFile);
 app.get("/dashboard", fetchDashboard);
 app.post("/token/verify", verifyToken);
 app.post("/share", AuthMiddleware, shareFile);
+app.get("/share", AuthMiddleware, fetchShared);
