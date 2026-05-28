@@ -29,7 +29,8 @@ const createFile = async (req, res) => {
 
 const fetchFile = async (req, res) => {
   try {
-    const file = await FileModel.find();
+    const {limit} = req.query;
+    const file = await FileModel.find().limit(limit);
     res.status(200).json(file);
   } catch (err) {
     res.status(500).json({ message: err.message });

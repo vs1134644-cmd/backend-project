@@ -4,12 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="https://unpkg.com/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
   </head>
   <body>
     <div class="bg-gray-300 min-h-screen">
@@ -28,7 +35,7 @@
           <p class="text-sm text-gray-100" id="email"></p>
         </div>
         <div class="px-6 flex flex-col gap-4">
-          <a href="./dashboard.html">
+          <a href="./dashboard">
             <button
               class="bg-rose-400 text-white py-2 w-full rounded hover:bg-rose-600"
             >
@@ -169,15 +176,45 @@
             </div>
 
             <div
-              class="col-span-2 relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg p-6"
+              class="col-span-2 relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg p-6 space-y-4"
             >
               <h1 class="text-lg font-semibold text-gray-600">Recent Files</h1>
+              <div class="space-y-3" id="recent-files"></div>
             </div>
 
             <div
-              class="col-span-2 relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg p-6"
+              class="col-span-2 relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg p-6 space-y-4"
             >
               <h1 class="text-lg font-semibold text-gray-600">Recent Shered</h1>
+              <div class="space-y-3">
+                <div class="flex justify-between">
+                  <div>
+                    <h1 class="text-zinc-600 font-semibold capitalize">
+                      filename
+                    </h1>
+                    <small class="text-gray-600 text-sm">Mb</small>
+                  </div>
+                  <p class="text-gray-600 text-sm">27 may 2026</p>
+                </div>
+                <div class="flex justify-between">
+                  <div>
+                    <h1 class="text-zinc-600 font-semibold capitalize">
+                      filename
+                    </h1>
+                    <small class="text-gray-600 text-sm">Mb</small>
+                  </div>
+                  <p class="text-gray-600 text-sm">27 may 2026</p>
+                </div>
+                <div class="flex justify-between">
+                  <div>
+                    <h1 class="text-zinc-600 font-semibold capitalize">
+                      filename
+                    </h1>
+                    <small class="text-gray-600 text-sm">Mb</small>
+                  </div>
+                  <p class="text-gray-600 text-sm">27 may 2026</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
