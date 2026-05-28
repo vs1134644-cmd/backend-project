@@ -27,8 +27,10 @@
       >
         <div class="flex flex-col items-center py-6 overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1773332585687-85beb4da71ab?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src=""
             alt="avatr image"
+            id="pic"
+            onclick="uploadImage()"
             class="rounded-full w-25 h-25 border-2 border-white"
           />
           <h1 class="text-lg font-medium text-white" id="fullname"></h1>
@@ -97,123 +99,27 @@
         </nav>
         <div class="p-6 space-y-4">
           <h1 class="text-lg font-medium">Dashboard</h1>
-          <div class="grid grid-cols-4 gap-8">
-            <div
-              class="relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg h-40 flex flex-col justify-center items-center"
-            >
-              <h1 class="text-lg font-semibold text-gray-600">Videos</h1>
-              <p class="text-4xl font-bold">25455</p>
-              <div
-                style="
-                  background-image: linear-gradient(
-                    to right,
-                    #b8cbb8 0%,
-                    #b8cbb8 0%,
-                    #b465da 0%,
-                    #cf6cc9 33%,
-                    #ee609c 66%,
-                    #ee609c 100%
-                  );
-                "
-                class="flex justify-center items-center w-[100px] h-[100px] rounded-full absolute top-7.5 -left-4"
-              >
-                <i class="ri-live-line text-4xl text-white"></i>
-              </div>
-            </div>
-            <div
-              class="relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg h-40 flex flex-col justify-center items-center"
-            >
-              <h1 class="text-lg font-semibold text-gray-600">Audio</h1>
-              <p class="text-4xl font-bold">20545</p>
-              <div
-                style="
-                  background-image: linear-gradient(
-                    to right,
-                    #6a11cb 0%,
-                    #2575fc 100%
-                  );
-                "
-                class="flex justify-center items-center w-[100px] h-[100px] rounded-full absolute top-7.5 -left-4"
-              >
-                <i class="ri-folder-music-line text-4xl text-white"></i>
-              </div>
-            </div>
-            <div
-              class="relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg h-40 flex flex-col justify-center items-center"
-            >
-              <h1 class="text-lg font-semibold text-gray-600">PDF</h1>
-              <p class="text-4xl font-bold">25455</p>
-              <div
-                style="
-                  background-image: linear-gradient(
-                    to right,
-                    #f83600 0%,
-                    #f9d423 100%
-                  );
-                "
-                class="flex justify-center items-center w-[100px] h-[100px] rounded-full absolute top-7.5 -left-4"
-              >
-                <i class="ri-file-pdf-2-line text-4xl text-white"></i>
-              </div>
-            </div>
-            <div
-              class="relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg h-40 flex flex-col justify-center items-center"
-            >
-              <h1 class="text-lg font-semibold text-gray-600">Images</h1>
-              <p class="text-4xl font-bold">669</p>
-              <div
-                style="
-                  background-image: linear-gradient(
-                    to right,
-                    #92fe9d 0%,
-                    #00c9ff 100%
-                  );
-                "
-                class="flex justify-center items-center w-[100px] h-[100px] rounded-full absolute top-7.5 -left-4"
-              >
-                <i class="ri-file-image-line text-4xl text-white"></i>
-              </div>
-            </div>
 
-            <div
-              class="col-span-2 relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg p-6 space-y-4"
-            >
-              <h1 class="text-lg font-semibold text-gray-600">Recent Files</h1>
-              <div class="space-y-3" id="recent-files"></div>
-            </div>
+          <div class="flex flex-col gap-8">
+            <div id="reports" class="grid grid-cols-4 gap-8"></div>
 
-            <div
-              class="col-span-2 relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg p-6 space-y-4"
-            >
-              <h1 class="text-lg font-semibold text-gray-600">Recent Shered</h1>
-              <div class="space-y-3">
-                <div class="flex justify-between">
-                  <div>
-                    <h1 class="text-zinc-600 font-semibold capitalize">
-                      filename
-                    </h1>
-                    <small class="text-gray-600 text-sm">Mb</small>
-                  </div>
-                  <p class="text-gray-600 text-sm">27 may 2026</p>
-                </div>
-                <div class="flex justify-between">
-                  <div>
-                    <h1 class="text-zinc-600 font-semibold capitalize">
-                      filename
-                    </h1>
-                    <small class="text-gray-600 text-sm">Mb</small>
-                  </div>
-                  <p class="text-gray-600 text-sm">27 may 2026</p>
-                </div>
-                <div class="flex justify-between">
-                  <div>
-                    <h1 class="text-zinc-600 font-semibold capitalize">
-                      filename
-                    </h1>
-                    <small class="text-gray-600 text-sm">Mb</small>
-                  </div>
-                  <p class="text-gray-600 text-sm">27 may 2026</p>
-                </div>
+            <div class="flex gap-4">
+              <div
+                class="w-full relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg p-6 space-y-4"
+              >
+                <h1 class="text-lg font-semibold text-gray-600">
+                  Recent Files
+                </h1>
+                <div class="space-y-3" id="recent-files"></div>
+              </div>
+
+              <div
+                class="w-full relative overflow-hidden bg-white rounded-lg shadow hover:shadow-lg p-6 space-y-4"
+              >
+                <h1 class="text-lg font-semibold text-gray-600">
+                  Recent Shered
+                </h1>
+                <div class="space-y-3" id="recent-shared"></div>
               </div>
             </div>
           </div>

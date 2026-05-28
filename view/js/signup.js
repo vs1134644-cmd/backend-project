@@ -20,10 +20,9 @@ const signup = async (e) => {
 
     const { data } = await axios.post("http://localhost:8080/signup", payload);
     toast.success(data.message);
-    toast.success(data.message);
-    setTimeout(()=>{
-      location.href = "../app/login.html";
-    },2000)
+    setTimeout(() => {
+      location.href = "/app/login.html";
+    }, 2000);
   } catch (err) {
     toast.error(err.response ? err.response.data.message : err.message);
   }

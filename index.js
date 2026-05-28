@@ -77,7 +77,7 @@ app.post("/file", AuthMiddleware, upload.single("file"), createFile);
 app.get("/files", AuthMiddleware, fetchFile);
 app.delete("/files/:id", AuthMiddleware, deleteFile);
 app.get("/files/download/:id", AuthMiddleware, downloadFile);
-app.get("/dashboard", fetchDashboard);
+app.get("/dashboard-reports", fetchDashboard);
 app.post("/token/verify", verifyToken);
 app.post("/share", AuthMiddleware, shareFile);
 app.get("/share", AuthMiddleware, fetchShared);

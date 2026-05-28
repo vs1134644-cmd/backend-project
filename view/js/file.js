@@ -80,7 +80,7 @@ const fetchFiles = async () => {
                 <td class="py-4 pl-6 capitalize">${file.filename}</td>
                 <td class="capitalize">${file.type}</td>
                 <td>${getSize(file.size)}MB</td>
-                <td>${moment(file.cratedAt).format("DD MMM YYYY")}</td>
+                <td>${moment(file.createdAt).format("DD MMM YYYY")}</td>
                 <td>
                   <div class="space-x-2">
                     <button
