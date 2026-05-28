@@ -13,7 +13,7 @@ const getSession = async () => {
       "http://localhost:8080/token/verify",
       payload,
     );
-    console.log(data);
+    return data;
   } catch (err) {
     console.log(err);
   }

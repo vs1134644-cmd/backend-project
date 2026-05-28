@@ -28,8 +28,8 @@ const showUserDetails = async () => {
   const session = await getSession();
   let fullname1 = document.getElementById("fullname");
   let email = document.getElementById("email");
-  
-  // email.innerHTML = session.email;
+  fullname1.innerHTML = session.fullname;
+  email.innerHTML = session.email;
 };
 
 const getSize = (size) => {
